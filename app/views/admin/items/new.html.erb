@@ -1,0 +1,26 @@
+<h2>商品新規登録</h2>
+
+<%= form_with model: @item, url:admin_items_path, local:true do |f| %>
+
+<%= f.label :"商品画像" %></br>
+<%= f.attachment_field :image %></br>
+
+<%= f.label :"商品名" %></br>
+<%= f.text_field :name, autofocus: true, placeholder: "商品名" %></br>
+
+<%= f.label :"商品説明" %></br>
+<%= f.text_area :introduction, autofocus: true, placeholder: "説明文を記述" %></br>
+
+<%= f.label :"ジャンル" %></br>
+<%= f.collection_select :genre_id, Genre.all, :id, :name %></br>
+<!--Genre.allでジャンルの情報を取得する-->
+
+<%= f.label :"税抜価格" %></br>
+<%= f.text_field :price, autofocus: true, placeholder: "1000" %></br>
+
+<%= f.label :"販売ステータス" %></br>
+<%= f.select :is_active, ["販売中", "販売停止中"] %></br>
+
+<%= f.submit "新規登録" %></br>
+
+<% end %>
