@@ -1,24 +1,48 @@
 <h1>ショッピングカート</h1>
 
 <% if @cart_items.any? %>
+  <table>
+    <thead>
+      <tr>
+        <th>商品名</th>
+        <th>単価（税込）</th>
+        <th>数量</th>
+        <th>小計</th>
+        <th></th>
+      </tr>
+    </thead>
 
-  <% @cart_items.each do |cart_item| %>
-    <%= attachment_image_tag cart_item.item, :image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
-    <h5><%= cart_item.item.name %></h5>
-    <p><%= cart_item.item.price %>円</p>
-
-    <%= form_for cart_item do |f| %>
-      <%= f.label :"数量" %>
-      <%= f.select :amount, [1,2,3,4,5,6,7,8,9,10] %>
-      <%= f.submit "変更" %>
-    <% end %>
-
-    <%= link_to "削除", cart_item_path(cart_item), method: :delete %>
-  <% end %>
+    <tbody>
+      <% @cart_items.each do |cart_item| %>
+        <tr>
+          <td>
+            <%= attachment_image_tag cart_item.item, :image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
+            <%= cart_item.item.name %>
+          </td>
+          <td>
+            <%= (cart_item.item.price * 1.1).round %>円
+          </td>
+          <td>
+            <%= form_for cart_item do |f| %>
+              <%= f.label :"数量" %>
+              <%= f.select :amount, [1,2,3,4,5,6,7,8,9,10] %>
+              <%= f.submit "変更" %>
+            <% end %>
+          </td>
+          <td>
+            <%= (cart_item.item.price * cart_item.amount * 1.1).round %>円
+          </td>
+          <td>
+            <%= link_to "削除", cart_item_path(cart_item), method: :delete, data: {confirm: "#{cart_item.item.name}を削除してよろしいですか？"} %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 
   <div>合計金額</div>
-  <h4>¥<%= @total %></h4>
-  <%= link_to "カートを空にする",  cart_items_destroy_all_path, method: :delete %>
+  <h4>¥ <%= @total %></h4>
+  <%= link_to "カートを空にする",  cart_items_destroy_all_path, method: :delete, data: {confirm: "カート内を全て削除します。よろしいですか？"} %>
   <%= link_to "お買い物を続ける", items_path %>
   <%= link_to "注文手続きへ", cart_items_path %>
 

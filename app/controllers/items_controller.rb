@@ -1,6 +1,7 @@
 class ItemsController < ApplicationController
   def index
-    @items = Item.all
+    @items = Item.where(is_active: true).page(params[:page]).per(8)
+    @count = Item.count
   end
 
   def show

@@ -1,2 +1,15 @@
-<h1>商品詳細画面</h1>
+<h2>商品詳細画面</h2>
+
+<%= attachment_image_tag @item, :image, :fill, 250, 170, fallback: "no_image.jpg" %>
+<h3><%= @item.name %></h3>
+<p><%= @item.introduction %></p>
+<p>¥ <%= @item.price.to_s %><span>（税込）</span></p>
+
+<%= form_with model: @cart_item, url: cart_items_path, local: true do |f| %>
+<%= f.select :amount, options_for_select((1..10).to_a), include_blank: "個数選択" %>
+<%= f.hidden_field :item_id, :value => @item.id %>
+<%= f.submit "カートに入れる" %>
+<% end %>
+
+
 
