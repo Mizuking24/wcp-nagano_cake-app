@@ -8,6 +8,7 @@ Rails.application.routes.draw do
         passwords: 'admin/admins/passwords'
       }
   end
+  
 
   get "/admin" => "admin/homes#top"
 
@@ -24,10 +25,13 @@ Rails.application.routes.draw do
   get "customers/withdraw" => "customers#withdraw"
   patch "customers/unsubscribe" => "customers#unsubscribe"
   delete "cart_items/destroy_all" => "cart_items#destroy_all"
+  post "orders/info" => "orders#info"
+  get "orders/thanks" => "orders#thanks"
 
   resources :items, only:[:index, :show]
   resources :customers, only:[:show, :edit, :update]
   resources :cart_items, only:[:index, :update, :destroy, :create]
   resources :addresses, only:[:index, :create, :edit, :update, :destroy]
+  resources :orders, only:[:new, :create, :index, :show]
 
 end

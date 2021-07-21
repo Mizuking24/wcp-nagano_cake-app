@@ -1,0 +1,41 @@
+<h2>注文情報入力</h2>
+<%= form_with model: @order, url: orders_info_path, local: true do |f| %>
+<h3>支払方法</h3>
+<%= f.radio_button :payment_method, 0, checked: "checked" %>
+<%= f.label :"クレジットカード" %></br>
+<%= f.radio_button :payment_method, 1 %>
+<%= f.label :"銀行振込" %></br>
+
+
+<h3>お届け先</h3>
+<%= f.radio_button :address_option, 0, checked: "checked" %>
+<%= f.label :"ご自身の住所"  %></br>
+<p>
+〒<%= @customer.postal_code %> <%= @customer.address %></br>
+<%= @customer.last_name %><%= @customer.first_name %></br>
+</p>
+
+
+<%= f.radio_button :address_option, 1 %>
+<%= f.label :"登録済住所から選択" %></br>
+<%= f.collection_select :address_id, current_customer.addresses, :id, :address, :include_blank => "選択してください" %></br>
+
+
+<%= f.radio_button :address_option, 2 %>
+<%= f.label :"新しいお届け先" %></br>
+<table>
+  <tr>
+    <td>郵便番号（ハイフンなし）</td>
+    <td><%= f.text_field :postal_code, autofocus: true, placeholder: "0000000" %></td>
+  </tr>
+  <tr>
+    <td>住所</td>
+    <td><%= f.text_field :address,  autofocus: true, placeholder: "東京都渋谷区神園町０−０" %></td>
+  </tr>
+  <tr>
+    <td>宛名</td>
+    <td><%= f.text_field :name,  autofocus: true, placeholder: "令和太郎" %></td>
+  </tr>
+</table>
+<%= f.submit "確認画面へ進む" %>
+<% end %>
