@@ -6,7 +6,11 @@ class OrdersController < ApplicationController
 
   def info
     @order = Order.new
-    @order.payment_method = params[:order] [:payment_method]
+    if params[:order] [:payment_method] == "0"
+      @order.payment_method = "クレジットカード"
+    else
+      @order.payment_method = "銀行振込"
+    end
 
     if params[:order] [:address_option] == "0"
       @order.address = current_customer.address
@@ -33,18 +37,18 @@ class OrdersController < ApplicationController
 
   def create
     @order = Order.new(order_params)
-    current_customer.id = @order.customer_id
+    @order.customer_id = current_customer.id
     @order.save
 
     @cart_items = current_customer.cart_items.all
     @cart_items.each do |cart_item|
-      @order_details = @order.order_details.new
-      @order_details.item_id = cart_item.item.id
-      @order_details.price = cart_item.item.price * 1.1
-      @order_details.amount = cart_item.amount
-      @order_details.save
-      current_customer.cart_items.destroy_all
+      @order_detail = @order.order_details.new
+      @order_detail.item_id = cart_item.item.id
+      @order_detail.price = cart_item.item.price * 1.1
+      @order_detail.amount = cart_item.amount
+      @order_detail.save
     end
+    @cart_items.destroy_all
     redirect_to orders_thanks_path
   end
 

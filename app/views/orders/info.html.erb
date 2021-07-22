@@ -13,9 +13,9 @@
     <% @cart_items.each do |cart_item| %>
     <tr>
       <td><%= cart_item.item.name %></td>
-      <td><%= (cart_item.item.price * 1.1).round %></td>
+      <td><%= (cart_item.item.price * 1.1).round %>円</td>
       <td><%= cart_item.amount %></td>
-      <td><%= (cart_item.item.price * cart_item.amount * 1.1).round %></td>
+      <td><%= (cart_item.item.price * cart_item.amount * 1.1).round %>円</td>
     </tr>
     <% end %>
   </tbody>
@@ -24,15 +24,15 @@
 <table>
   <tr>
     <th>送料</th>
-    <td><%= @order.delivery_charge %></td>
+    <td><%= @order.delivery_charge %>円</td>
   </tr>
   <tr>
     <th>商品合計</th>
-    <td><%= @total.round %></td>
+    <td><%= @total.round %>円</td>
   </tr>
   <tr>
     <th>請求金額</th>
-    <td><%= @billing_amount %></td>
+    <td><%= @billing_amount.round %>円</td>
   </tr>
 </table>
 
