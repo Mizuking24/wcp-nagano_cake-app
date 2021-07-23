@@ -9,7 +9,7 @@ Rails.application.routes.draw do
       }
   end
   
-
+# 管理者側
   get "/admin" => "admin/homes#top"
 
   namespace :admin do
@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   end
 
 
-
+# 会員側
   root to: "homes#top"
   get "/about" => "homes#about"
   get "customers/withdraw" => "customers#withdraw"
