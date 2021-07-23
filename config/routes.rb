@@ -8,7 +8,7 @@ Rails.application.routes.draw do
         passwords: 'admin/admins/passwords'
       }
   end
-  
+
 # 管理者側
   get "/admin" => "admin/homes#top"
 
@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     resources :items, only:[:index, :create, :new, :show, :edit, :update]
     resources :genres, only:[:index, :create, :edit, :update]
     resources :customers, only:[:index, :show, :edit, :update]
+    resources :orders, only:[:show, :update]
   end
 
 
