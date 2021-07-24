@@ -28,11 +28,11 @@
 <table>
   <tr>
     <th>商品合計</th>
-    <td></td>
+    <td><%= @order.billing_amount - @order.delivery_charge %></td>
   </tr>
   <tr>
     <th>配送料</th>
-    <td></td>
+    <td><%= @order.delivery_charge %></td>
   </tr>
   <tr>
     <th><strong>ご請求額</strong></th>

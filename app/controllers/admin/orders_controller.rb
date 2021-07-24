@@ -1,7 +1,7 @@
 class Admin::OrdersController < ApplicationController
   def show
     @order = Order.find(params[:id])
-    @order_detail = Order_detail.where(order_id: params[:id])
+    @order_detail = OrderDetail.where(order_id: params[:id])
     @total = @order_detail.sum{|order_detail|order_detail.price * order_detail.amount}
     @billing_amount = @total + @order.delivery_charge
   end
