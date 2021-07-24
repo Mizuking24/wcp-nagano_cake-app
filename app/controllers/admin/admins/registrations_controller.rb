@@ -3,7 +3,7 @@
 class Admin::Admins::RegistrationsController < Devise::RegistrationsController
 
   def after_sign_up_path_for(resource)
-     admin_items_path
+     admin_path
   end
 
   # before_action :configure_sign_up_params, only: [:create]

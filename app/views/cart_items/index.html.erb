@@ -44,7 +44,7 @@
   <h4>¥ <%= @total %></h4>
   <%= link_to "カートを空にする",  cart_items_destroy_all_path, method: :delete, data: {confirm: "カート内を全て削除します。よろしいですか？"} %>
   <%= link_to "お買い物を続ける", items_path %>
-  <%= link_to "注文手続きへ", cart_items_path %>
+  <%= link_to "注文手続きへ", new_order_path %>
 
 <% else %>
 
