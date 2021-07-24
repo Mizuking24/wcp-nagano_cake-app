@@ -6,7 +6,7 @@ class OrderDetail < ApplicationRecord
   
   def change_order_status
     products = self.order.ordered_products
-    if self.create_status == "製作中" #ひとつでも制作ステータスが製作中なら注文ステータスも制作中になる
+    if self.create_status == "製作中" #ひとつでも製作ステータスが製作中なら注文ステータスも制作中になる
       self.order.update(order_status: "製作中")
     elsif products.pluck(:create_status).all?{ |status| status == "製作完了"} #全ての商品の制作ステータスが制作完了になると注文ステータスが発送準備中になる
       self.order.update(order_status: "発送準備中")
