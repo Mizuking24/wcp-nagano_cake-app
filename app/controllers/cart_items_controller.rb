@@ -1,4 +1,6 @@
 class CartItemsController < ApplicationController
+  before_action :authenticate_customer!
+  
   def index
     @cart_items = current_customer.cart_items
     # @total = 0
@@ -12,7 +14,7 @@ class CartItemsController < ApplicationController
   def create
     @cart_item = CartItem.new(cart_item_params)
     @cart_item.customer_id = current_customer.id
-     if @cart_item.save!
+     if @cart_item.save
        redirect_to  cart_items_path
      else
        @item = @cart_item.item

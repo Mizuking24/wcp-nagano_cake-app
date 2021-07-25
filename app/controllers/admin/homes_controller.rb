@@ -1,4 +1,6 @@
 class Admin::HomesController < ApplicationController
+   before_action :authenticate_admin_admin!
+  
   def top
     @customer = params[:customer_id]
     if @customer

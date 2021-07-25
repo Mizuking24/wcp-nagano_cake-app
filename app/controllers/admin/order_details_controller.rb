@@ -1,10 +1,11 @@
 class Admin::OrderDetailsController < ApplicationController
+
   def update
     order_detail = OrderDetail.find(params[:id])
     order_detail.update(order_detail_params)
     order = order_detail.order
     order_details = order.order_details
-    
+
     produce_count = 0
     done_count = 0
     order_details.each do |order_detail|
