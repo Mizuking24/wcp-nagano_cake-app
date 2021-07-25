@@ -41,18 +41,26 @@ class OrdersController < ApplicationController
     @order = Order.new(order_params)
     @order.customer_id = current_customer.id
     @order.delivery_charge = 800
-    @order.save
-
-    @cart_items = current_customer.cart_items.all
-    @cart_items.each do |cart_item|
-      @order_detail = @order.order_details.new
-      @order_detail.item_id = cart_item.item.id
-      @order_detail.price = cart_item.item.price * 1.1
-      @order_detail.amount = cart_item.amount
-      @order_detail.save
+    if @order.save
+      @cart_items = current_customer.cart_items.all
+      @cart_items.each do |cart_item|
+        @order_detail = @order.order_details.new
+        @order_detail.item_id = cart_item.item.id
+        @order_detail.price = cart_item.item.price * 1.1
+        @order_detail.amount = cart_item.amount
+        @order_detail.save
+      end
+      @cart_items.destroy_all
+      redirect_to orders_thanks_path
+    else
+      @cart_items = CartItem.where(customer_id: current_customer.id)
+      @total = @cart_items.sum{|cart_item|cart_item.item.price * cart_item.amount * 1.1}
+      @item = Item.where(params[:id])
+      @order.delivery_charge = 800
+      @billing_amount = @total + @order.delivery_charge
+      render :info
+      flash[:notice] = "値を入力してください。"
     end
-    @cart_items.destroy_all
-    redirect_to orders_thanks_path
   end
 
   def thanks

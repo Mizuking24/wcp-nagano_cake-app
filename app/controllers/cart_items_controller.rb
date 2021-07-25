@@ -1,6 +1,6 @@
 class CartItemsController < ApplicationController
   before_action :authenticate_customer!
-  
+
   def index
     @cart_items = current_customer.cart_items
     # @total = 0
@@ -17,6 +17,7 @@ class CartItemsController < ApplicationController
      if @cart_item.save
        redirect_to  cart_items_path
      else
+       flash[:notice] = "個数を選択してください"
        @item = @cart_item.item
        @cart_item = CartItem.new
        render "items/show"

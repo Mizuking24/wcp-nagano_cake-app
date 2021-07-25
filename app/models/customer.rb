@@ -6,7 +6,6 @@ class Customer < ApplicationRecord
 
   def active_for_authentication?
     super && (self.is_active == true)
-    flash[:notice] = "退会済みです。再度ご登録をしてご利用ください。"
   end
 
   has_many :cart_items, dependent: :destroy

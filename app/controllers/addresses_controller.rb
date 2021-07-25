@@ -13,6 +13,7 @@ class AddressesController < ApplicationController
       redirect_to addresses_path
     else
       @addresses = current_customer.addresses
+      flash[:notice] = "値を入力してください"
       render :index
     end
   end
