@@ -1,48 +1,70 @@
 <header>
-<% if customer_signed_in? %>
-    <li>
-      ようこそ、<%= current_customer.last_name %>さん！
-    </li>
-    <li>
-      <%= link_to "マイページ", customer_path(current_customer) %>
-    </li>
-    <li>
-      <%= link_to "商品一覧", items_path %>
-    </li>
-    <li>
-      <%= link_to "カート",  cart_items_path %>
-    </li>
-    <li>
-      <%= link_to "ログアウト",  destroy_customer_session_path, method: :delete %>
-    </li>
-<% elsif admin_admin_signed_in? %>
-    <li>
-      <%= link_to "商品一覧", admin_items_path %>
-    </li>
-    <li>
-      <%= link_to "会員一覧", admin_customers_path %>
-    </li>
-    <li>
-      <%= link_to "注文履歴一覧", admin_path %>
-    </li>
-    <li>
-      <%= link_to "ジャンル一覧", admin_genres_path %>
-    </li>
-    <li>
-      <%= link_to "ログアウト", destroy_admin_admin_session_path, method: :delete %>
-    </li>
-<% else %>
-    <li>
-      <%= link_to "About", about_path %>
-    </li>
-    <li>
-      <%= link_to "商品一覧", items_path %>
-    </li>
-    <li>
-      <%= link_to "新規登録", new_customer_registration_path %>
-    </li>
-    <li>
-      <%= link_to "ログイン", new_customer_session_path %>
-    </li>
-<% end %>
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark" id="mainNav">
+    <div class="container">
+      <%= link_to "NaganoCake", root_path, class: "fas fa-birthday-cake", class: "navbar-brand" %>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        Menu
+        <svg class="svg-inline--fa fa-bars fa-w-14 ms-1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="bars" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"></path></svg><!-- <i class="fas fa-bars ms-1"></i> Font Awesome fontawesome.com -->
+      </button>
+        <% if customer_signed_in? %>
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+              <li class="nav-item">
+                ようこそ、<%= current_customer.last_name %>さん！
+              </li>
+              <li class="nav-item">
+                <%= link_to "マイページ", customer_path(current_customer), class: "nav-link" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "商品一覧", items_path, class: "nav-link"%>
+              </li>
+              <li class="nav-item">
+                <%= link_to "カート",  cart_items_path, class: "nav-link" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "ログアウト",  destroy_customer_session_path, method: :delete, class: "nav-link" %>
+              </li>
+            </ul>
+          </div>
+        <% elsif admin_admin_signed_in? %>
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+              <li class="nav-item">
+                <%= link_to "商品一覧", admin_items_path, class: "nav-link" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "会員一覧", admin_customers_path, class: "nav-link" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "注文履歴一覧", admin_path, class: "nav-link" %>
+              </li class="nav-item">
+              <li>
+                <%= link_to "ジャンル一覧", admin_genres_path, class: "nav-link" %>
+              </li class="nav-item">
+              <li>
+                <%= link_to "ログアウト", destroy_admin_admin_session_path, method: :delete, class: "nav-link" %>
+              </li>
+            </ul>
+          </div>
+        <% else %>
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+              <li class="nav-item">
+                <%= link_to "About", about_path, class: "nav-link" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "商品一覧", items_path, class: "nav-link" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "新規登録", new_customer_registration_path, class: "nav-link" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "ログイン", new_customer_session_path, class: "nav-link" %>
+              </li>
+            </ul>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </nav>
 </header>
