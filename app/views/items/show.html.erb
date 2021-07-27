@@ -1,15 +1,25 @@
-<h2>商品詳細画面</h2>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <%= attachment_image_tag @item, :image, :fill, 300, 200, fallback: "no_image.jpg" %>
+    </div>
+    <div class="cart-field col-md-5">
+      <h2><%= @item.name %></h2>
+      <p><%= @item.introduction %></p>
+      <p>¥ <%= (@item.price * 1.1).round %><span>（税込）</span></p>
 
-<%= attachment_image_tag @item, :image, :fill, 250, 170, fallback: "no_image.jpg" %>
-<h3><%= @item.name %></h3>
-<p><%= @item.introduction %></p>
-<p>¥ <%= (@item.price * 1.1).round %><span>（税込）</span></p>
-
-<%= form_with model: @cart_item, url: cart_items_path, local: true do |f| %>
-<%= f.select :amount, options_for_select((1..10).to_a), include_blank: "個数選択" %>
-<%= f.hidden_field :item_id, :value => @item.id %>
-<%= f.submit "カートに入れる" %>
-<% end %>
+      <%= form_with model: @cart_item, url: cart_items_path, local: true do |f| %>
+        <div class="cart-form-group">
+          <%= f.select :amount, options_for_select((1..10).to_a), include_blank: "個数選択" %>
+          <%= f.hidden_field :item_id, :value => @item.id %>
+        </div>
+        <div class="cart-form-group">
+          <%= f.submit "カートに入れる", class: 'btn btn-primary' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
 
 
 
