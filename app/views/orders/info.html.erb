@@ -1,61 +1,70 @@
-<h2>注文情報確認画面</h2>
-<table>
-  <thead>
-    <tr>
-      <th>商品名</th>
-      <th>単価（税込）</th>
-      <th>数量</th>
-      <th>小計</th>
-    </tr>
-  </thead>
+<div class="cotainer">
+  <div class="col-md-8 order-md-1">
+  <h2 class="mb-3">注文情報確認</h2>
+  <div class="row">
+    <div class="col-md-7 ofset-md-1">
+      <table class ="table">
+        <thead>
+          <tr>
+            <th>商品名</th>
+            <th>単価(税込)</th>
+            <th>数量</th>
+            <th>小計</th>
+          </tr>
+           <tbody>
+            <% @cart_items.each do |cart_item| %>
+            <tr>
+              <td><%= cart_item.item.name %></td>
+              <td><%= (cart_item.item.price * 1.1).round %>円</td>
+              <td><%= cart_item.amount %></td>
+              <td><%= (cart_item.item.price * cart_item.amount * 1.1).round %>円</td>
+            </tr>
+            <% end %>
+          </tbody>
+        </thead>
+      </table>
+    </div>
+    <div class="col-md-4">
+      <table class="table">
+        <tr>
+          <th>送料</th>
+          <td><%= @order.delivery_charge %>円</td>
+        </tr>
+        <tr>
+          <th>商品合計</th>
+          <td><%= @total.round %>円</td>
+        </tr>
+        <tr>
+          <th>請求金額</th>
+          <td><%= @billing_amount.round %>円</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div class="row">
+    <table class="table">
+      <tr>
+        <th>支払方法</th>
+        <td><%= @order.payment_method %></td>
+      </tr>
+      <tr>
+        <th>お届け先</th>
+        <td>
+          〒<%= @order.postal_code %></br>
+          <%= @order.address %></br>
+          <%= @order.name %></br>
+        </td>
+      </tr>
+    </table>
 
-  <tbody>
-    <% @cart_items.each do |cart_item| %>
-    <tr>
-      <td><%= cart_item.item.name %></td>
-      <td><%= (cart_item.item.price * 1.1).round %>円</td>
-      <td><%= cart_item.amount %></td>
-      <td><%= (cart_item.item.price * cart_item.amount * 1.1).round %>円</td>
-    </tr>
+    <%= form_with model: @order, url: orders_path, method: :post, local: true do |f| %>
+      <%= f.hidden_field :payment_method, value:  @order.payment_method %>
+      <%= f.hidden_field :address, value: @order.address %>
+      <%= f.hidden_field :postal_code, value: @order.postal_code %>
+      <%= f.hidden_field :name, value: @order.name %>
+      <%= f.hidden_field :billing_amount, value: @billing_amount %>
+      <%= f.submit "注文を確定する", class:"btn btn-primary" %>
     <% end %>
-  </tbody>
-</table>
-
-<table>
-  <tr>
-    <th>送料</th>
-    <td><%= @order.delivery_charge %>円</td>
-  </tr>
-  <tr>
-    <th>商品合計</th>
-    <td><%= @total.round %>円</td>
-  </tr>
-  <tr>
-    <th>請求金額</th>
-    <td><%= @billing_amount.round %>円</td>
-  </tr>
-</table>
-
-<table>
-  <tr>
-    <th>支払方法</th>
-    <td><%= @order.payment_method %></td>
-  </tr>
-  <tr>
-    <th>お届け先</th>
-    <td>
-      〒<%= @order.postal_code %></br>
-      <%= @order.address %></br>
-      <%= @order.name %></br>
-    </td>
-  </tr>
-</table>
-
-<%= form_with model: @order, url: orders_path, method: :post, local: true do |f| %>
-<%= f.hidden_field :payment_method, value:  @order.payment_method %>
-<%= f.hidden_field :address, value: @order.address %>
-<%= f.hidden_field :postal_code, value: @order.postal_code %>
-<%= f.hidden_field :name, value: @order.name %>
-<%= f.hidden_field :billing_amount, value: @billing_amount %>
-<%= f.submit "注文を確定する" %>
-<% end %>
+  </div>
+  </div>
+</div>
