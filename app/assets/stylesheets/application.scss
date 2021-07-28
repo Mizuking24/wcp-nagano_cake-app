@@ -20,6 +20,10 @@
   @import 'font-awesome-sprockets';
   @import 'font-awesome';
 
+  .container{
+    height: 100%;
+    width: 100%;
+  }
   .col-md-8{
     margin: 50px;
   }
@@ -32,3 +36,17 @@
   .customer_show_button{
     margin: 50px 0 10px 0;
   }
+  .withdraw-button{
+    margin-left: 30px;
+  }
+  .unsubscribe_message{
+    text-align: center;
+     margin-left: 300px;
+  }
+  .unsubscribe{
+    margin-left: 100px;
+  }
+  .customer_edit{
+    margin-bottom: 30px;
+  }
+
