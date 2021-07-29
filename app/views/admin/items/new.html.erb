@@ -1,26 +1,40 @@
-<h2>商品新規登録</h2>
-
-<%= form_with model: @item, url:admin_items_path, local:true do |f| %>
-
-<%= f.label :"商品画像" %></br>
-<%= f.attachment_field :image %></br>
-
-<%= f.label :"商品名" %></br>
-<%= f.text_field :name, autofocus: true, placeholder: "商品名" %></br>
-
-<%= f.label :"商品説明" %></br>
-<%= f.text_area :introduction, autofocus: true, placeholder: "説明文を記述" %></br>
-
-<%= f.label :"ジャンル" %></br>
-<%= f.collection_select :genre_id, Genre.all, :id, :name %></br>
-<!--Genre.allでジャンルの情報を取得する-->
-
-<%= f.label :"税抜価格" %></br>
-<%= f.text_field :price, autofocus: true, placeholder: "1000" %></br>
-
-<%= f.label :"販売ステータス" %></br>
-<%= f.select :is_active, ["販売中", "販売停止中"] %></br>
-
-<%= f.submit "新規登録" %></br>
-
-<% end %>
+<div class="container">
+  <div class="col-md-8">
+    <h2>商品新規登録</h2>
+    <%= form_with model: @item, url:admin_items_path, local:true, class: "form-horizontal" do |f| %>
+    <table>
+      <tr>
+        <th><%= f.label :"商品画像" %></th>
+        <td><%= f.attachment_field :image, class: "form-control-file product_item" %></td>
+        <td></td>
+      </tr>
+      <tr>
+        <th><%= f.label :"商品名" %></th>
+        <td><%= f.text_field :name, autofocus: true, placeholder: "商品名", class: "form-control product_item" %></td>
+        <td></td>
+      </tr>
+      <tr>
+        <th><%= f.label :"商品説明" %></th>
+        <td><%= f.text_area :introduction, autofocus: true, placeholder: "説明文を記述", class: "form-control product_item" %></td>
+        <td></td>
+      </tr>
+      <tr>
+        <th><%= f.label :"ジャンル" %></th>
+        <td><%= f.collection_select :genre_id, Genre.all, :id, :name, class: "form-control product_item" %></td>
+        <td></td>
+      </tr>
+      <tr>
+        <th><%= f.label :"税抜価格" %></th>
+        <td><%= f.text_field :price, autofocus: true, placeholder: "1000", class: "form-control product_item" %></td>
+        <td></td>
+      </tr>
+      <tr>
+        <th><%= f.label :"販売ステータス" %></th>
+        <td><%= f.select :is_active, options_for_select([{value: true, name: "販売中"}, {value: false, name: "販売停止中"}].map{|c|[c[:name], c[:value]]}), class: "form-control product_item" %></td>
+        <td></td>
+      </tr>
+    </table>
+    <%= f.submit "新規登録", class: "product_item btn btn-success" %>
+    <% end %>
+  </div>
+</div>
