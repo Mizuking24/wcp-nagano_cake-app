@@ -1,28 +1,29 @@
-<h2>ジャンル一覧・追加</h2>
+<div class="container">
+  <div class="col-md-5 genre-container">
+    <h3>ジャンル一覧・追加</h3>
+    <!--ジャンルの新規登録フォーム-->
+    <%= form_with model: @genre, url: admin_genres_path, class: "genre-form", local: true do |f| %>
+    <%= f.label :"ジャンル名" %>
+    <%= f.text_field :name, autofocus: true %>
+    <%= f.submit "新規登録", class: "btn btn-success" %>
+    <% end %>
+    <!--ジャンル一覧-->
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ジャンル</th>
+          <th></th>
+        </tr>
+      </thead>
 
-<!--ジャンルの新規登録フォーム-->
-<%= form_with model: @genre, url: admin_genres_path, local: true do |f| %>
-<%= f.label :"ジャンル名" %>
-<%= f.text_field :name, autofocus: true %>
-<%= f.submit "新規登録" %>
-<% end %>
-
-<!--ジャンル一覧-->
-<table>
-  <thead>
-    <tr>
-      <th>ジャンル</th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <% @genres.each do |genre| %>
-  <tbody>
-    <tr>
-      <td><%= genre.name %></td>
-      <td><%= link_to "編集", edit_admin_genre_path(genre.id) %></td>
-    </tr>
-  </tbody>
-  <% end %>
-</table>
-
+      <% @genres.each do |genre| %>
+      <tbody>
+        <tr>
+          <td><%= genre.name %></td>
+          <td><%= link_to "編集", edit_admin_genre_path(genre.id), class: "btn btn-success" %></td>
+        </tr>
+      </tbody>
+      <% end %>
+    </table>
+  </div>
+</div>
