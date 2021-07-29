@@ -1,20 +1,22 @@
-<h2>配送先編集</h2>
-<%= form_with model: @address, url: address_path(@address), local: true do |f| %>
-  <table>
-    <tr>
-      <td><%= f.label :"郵便番号（ハイフンなし）" %></td>
-      <td><%= f.text_field :postal_code, autofocus: true %></td>
-    </tr>
-    <tr>
-      <td><%= f.label :"住所" %></td>
-      <td><%= f.text_field :address, autofocus: true %></td>
-    </tr>
-    <tr>
-      <td><%= f.label :"宛名" %></td>
-      <td><%= f.text_field :name, autofocus: true %></td>
-    </tr>
-    <tr>
-      <td><%= f.submit "変更内容を保存" %></td>
-    </tr>
-  </table>
-<% end %>
+<div class ="container">
+  <div class="col-md-8">
+    <h2>配送先編集</h2>
+    <%= form_with model: @address, url: address_path(@address), local: true do |f| %>
+      <table class="table">
+        <tr>
+          <td><%= f.label :"郵便番号（ハイフンなし）" %></td>
+          <td><%= f.text_field :postal_code, autofocus: true, class: "form-control" %></td>
+        </tr>
+        <tr>
+          <td><%= f.label :"住所" %></td>
+          <td><%= f.text_field :address, autofocus: true, class: "form-control" %></td>
+        </tr>
+        <tr>
+          <td><%= f.label :"宛名" %></td>
+          <td><%= f.text_field :name, autofocus: true, class: "form-control" %></td>
+        </tr>
+        <tr>
+          <td><%= f.submit "変更内容を保存", class: "btn btn-success" %></td>
+        </tr>
+      </table>
+    <% end %>
