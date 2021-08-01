@@ -56,7 +56,6 @@ class OrdersController < ApplicationController
       @cart_items = CartItem.where(customer_id: current_customer.id)
       @total = @cart_items.sum{|cart_item|cart_item.item.price * cart_item.amount * 1.1}
       @item = Item.where(params[:id])
-      @order.delivery_charge = 800
       @billing_amount = @total + @order.delivery_charge
       render :info
       flash[:notice] = "値を入力してください。"

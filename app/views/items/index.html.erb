@@ -1,25 +1,29 @@
-<h3 class="jumbotron-heading">商品一覧(全<%= @count %>件）</h3>
-  <div class="album py-5 bg-light">
-    <div class="container">
-      <div class="row">
-        <% @items.each do |item| %>
-        <div class="col-md-3">
-          <div class="card mb-3 shadow-sm">
-            <%= link_to item_path(item) do %>
-              <%= attachment_image_tag item, :image, :fill, 230, 230, fallback: "no_image.jpg", class: "card-img-top" %>
-            <% end %>
-            <div class="card-body">
-              <p class="card-text">
-                <%= item.name %>
-              </p>
-              <p class="card-text">
-                ¥<%= item.price %>
-              </p>
+<div class="container">
+  <div class="col-md-10 order-md-1">
+    <h3 class="jumbotron-heading">商品一覧(全<%= @count %>件）</h3>
+      <div class="album py-5 bg-light">
+        <div class="container">
+          <div class="row">
+            <% @items.each do |item| %>
+            <div class="col-md-3">
+              <div class="card mb-3 shadow-sm">
+                <%= link_to item_path(item) do %>
+                  <%= attachment_image_tag item, :image, :fill, 230, 230, fallback: "no_image.jpg", class: "card-img-top" %>
+                <% end %>
+                <div class="card-body">
+                  <p class="card-text">
+                    <%= item.name %>
+                  </p>
+                  <p class="card-text">
+                    ¥<%= item.price %>
+                  </p>
+                </div>
+              </div>
             </div>
+            <% end %>
+            <%= paginate @items %>
           </div>
         </div>
-        <% end %>
-        <%= paginate @items %>
       </div>
-    </div>
-  </div>
+   </div>
+</div>
